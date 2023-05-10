@@ -1,5 +1,6 @@
 package skypro.homeworks.calculator.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,28 +17,54 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
-    @GetMapping
-    public String showGreeting() {
+    @GetMapping(value = "", produces = MediaType.TEXT_HTML_VALUE)
+    public String hello() {
         return "Добро пожаловать в калькулятор";
     }
 
     @GetMapping("/plus")
-    public String calcSum(@RequestParam() String num1, @RequestParam() String num2) {
-        return calculatorService.calc(num1, num2, "+");
+    public String plus(@RequestParam(value = "num1", required = false) Integer a,
+                       @RequestParam(value = "num2", required = false) Integer b) {
+        return buildView(a, b, "+");
     }
 
     @GetMapping("/minus")
-    public String calcDiff(@RequestParam() String num1, @RequestParam() String num2) {
-        return calculatorService.calc(num1, num2, "-");
+    public String minus(@RequestParam(value = "num1", required = false) Integer a,
+                        @RequestParam(value = "num2", required = false) Integer b) {
+        return buildView(a, b, "-");
     }
 
     @GetMapping("/multiply")
-    public String calcMult(@RequestParam() String num1, @RequestParam() String num2) {
-        return calculatorService.calc(num1, num2, "*");
+    public String multiply(@RequestParam(value = "num1", required = false) Integer a,
+                           @RequestParam(value = "num2", required = false) Integer b) {
+        return buildView(a, b, "*");
     }
 
     @GetMapping("/divide")
-    public String calcDiv(@RequestParam() String num1, @RequestParam() String num2) {
-        return calculatorService.calc(num1, num2, "/");
+    public String divide(@RequestParam(value = "num1", required = false) Integer a,
+                         @RequestParam(value = "num2", required = false) Integer b) {
+        return buildView(a, b, "/");
     }
+
+    private String buildView(Integer a, Integer b, String operation) {
+        if (a == null || b == null) {
+            return "Ошибка! Все параметры должны быть переданы!";
+        }
+
+        if ("/".equals(operation) && b == 0) {
+            return "На ноль делить нельзя!";
+        }
+
+        Number result;
+
+        switch (operation) {
+            case "-" -> result = calculatorService.minus(a, b);
+            case "*" -> result = calculatorService.multiply(a, b);
+            case "/" -> result = calculatorService.divide(a, b);
+            default -> result = calculatorService.plus(a, b);
+        }
+
+        return a + " " + operation + " " + b + " = " + result;
+    }
+
 }

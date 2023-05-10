@@ -1,5 +1,13 @@
 package skypro.homeworks.calculator.service;
 
 public interface CalculatorService {
-    String calc(String num1, String num2, String operator);
+
+    Number plus(Integer a, Integer b);
+
+    Number minus(Integer a, Integer b);
+
+    Number multiply(Integer a, Integer b);
+
+    Number divide(Integer a, Integer b);
+
 }
