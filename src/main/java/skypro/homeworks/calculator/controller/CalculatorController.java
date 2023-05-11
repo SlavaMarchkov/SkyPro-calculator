@@ -47,13 +47,9 @@ public class CalculatorController {
     }
 
     private String buildView(Integer a, Integer b, String operation) {
-        if (a == null || b == null) {
-            return "Ошибка! Все параметры должны быть переданы!";
-        }
 
-        if ("/".equals(operation) && b == 0) {
-            return "На ноль делить нельзя!";
-        }
+        String x = calculatorService.checkInputsForNull(a, b);
+        if (x != null) return x;
 
         Number result;
 
