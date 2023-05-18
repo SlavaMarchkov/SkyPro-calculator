@@ -10,4 +10,6 @@ public interface CalculatorService {
 
     Number divide(Integer a, Integer b);
 
+    String checkInputsForNull(Integer a, Integer b);
+
 }

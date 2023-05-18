@@ -1,11 +1,11 @@
 ### Plus
-GET http://localhost:8080/calculator/plus?num1=45&num2=20
+GET http://localhost:8080/calculator/plus?num1=62&num2=60
 
 ### Minus
-GET http://localhost:8080/calculator/minus?num1=45&num2=20
+GET http://localhost:8080/calculator/minus?num1=45&num2=32
 
 ### Multiply
 GET http://localhost:8080/calculator/multiply?num1=45&num2=20
 
 ### Divide
-GET http://localhost:8080/calculator/divide?num1=45&num2=20
+GET http://localhost:8080/calculator/divide?num1=45&num2=0
