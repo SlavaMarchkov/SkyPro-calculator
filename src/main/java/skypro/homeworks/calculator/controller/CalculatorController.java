@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import skypro.homeworks.calculator.service.CalculatorService;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping(path = "/calculator")
 public class CalculatorController {
@@ -24,25 +26,41 @@ public class CalculatorController {
 
     @GetMapping("/plus")
     public String plus(@RequestParam(value = "num1", required = false) Integer a,
-                       @RequestParam(value = "num2", required = false) Integer b) {
+                       @RequestParam(value = "num2", required = false) Integer b
+    ) {
+        if (Objects.isNull(a) || Objects.isNull(b)) {
+            return "Оба параметра должны быть переданы";
+        }
         return buildView(a, b, "+");
     }
 
     @GetMapping("/minus")
     public String minus(@RequestParam(value = "num1", required = false) Integer a,
-                        @RequestParam(value = "num2", required = false) Integer b) {
+                        @RequestParam(value = "num2", required = false) Integer b
+    ) {
+        if (Objects.isNull(a) || Objects.isNull(b)) {
+            return "Оба параметра должны быть переданы";
+        }
         return buildView(a, b, "-");
     }
 
     @GetMapping("/multiply")
     public String multiply(@RequestParam(value = "num1", required = false) Integer a,
-                           @RequestParam(value = "num2", required = false) Integer b) {
+                           @RequestParam(value = "num2", required = false) Integer b
+    ) {
+        if (Objects.isNull(a) || Objects.isNull(b)) {
+            return "Оба параметра должны быть переданы";
+        }
         return buildView(a, b, "*");
     }
 
     @GetMapping("/divide")
     public String divide(@RequestParam(value = "num1", required = false) Integer a,
-                         @RequestParam(value = "num2", required = false) Integer b) {
+                         @RequestParam(value = "num2", required = false) Integer b
+    ) {
+        if (Objects.isNull(a) || Objects.isNull(b)) {
+            return "Оба параметра должны быть переданы";
+        }
         return buildView(a, b, "/");
     }
 

@@ -1,36 +1,37 @@
 package skypro.homeworks.calculator.service;
 
 import org.springframework.stereotype.Service;
+import skypro.homeworks.calculator.exception.DivByZeroException;
 
 @Service
 public class CalculatorServiceImpl implements CalculatorService {
 
     @Override
-    public Number plus(final Integer a, final Integer b) {
+    public Number plus(final int a, final int b) {
         return a + b;
     }
 
     @Override
-    public Number minus(final Integer a, final Integer b) {
+    public Number minus(final int a, final int b) {
         return a - b;
     }
 
     @Override
-    public Number multiply(final Integer a, final Integer b) {
+    public Number multiply(final int a, final int b) {
         return a * b;
     }
 
     @Override
-    public Number divide(final Integer a, final Integer b) {
+    public Number divide(final int a, final int b) {
         if (b == 0) {
-            throw new IllegalArgumentException("На ноль делить нельзя!");
+            throw new DivByZeroException();
         }
-        return a / (double) b;
+        return (double) a / b;
     }
 
     @Override
-    public String checkInputsForNull(final Integer a, final Integer b) {
-        if (a == null || b == null) {
+    public String checkInputsForNull(final int a, final int b) {
+        if (a == 0 || b == 0) {
             return "Ошибка! Все параметры должны быть переданы!";
         }
         return null;
